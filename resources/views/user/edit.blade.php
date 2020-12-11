@@ -5,11 +5,11 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card">
-            <div class="card-header">Nieuwe gebruiker</div>
+            <div class="card-header">Wijzig gebruiker</div>
             <div class="card-body">
-            <form name="new" method="post" action="/users/{{$user->id}}">
-                    @method('PUT')
-                    @csrf
+            <form name="update" method="post" action="{{ route('users.update', $user->id)}}">
+                @csrf
+                @method('put')
                     <div class="form-group">
                         <label for="name">Naam</label>
                         <input type="text" class="form-control" name="name" id="name" value="{{$user->name}}"/>
@@ -27,9 +27,9 @@
                     <div class="form-group">
                         <label for="role">Rol</label>
                         <select name="role" class="form-control">
-                            <option value="admin" @if($user->role == 'admin') selected @endif>Admin</option>
-                            <option value="writer" @if($user->role == 'writer') selected @endif>Schrijver</option>
-                            <option value="follower" @if($user->role == 'follower') selected @endif>Volger</option>
+                            <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="writer" {{ $user->role == 'writer' ? 'selected' : '' }}>Schrijver</option>
+                            <option value="follower" {{ $user->role == 'follower' ? 'selected' : '' }}>Volger</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Opslaan</button>

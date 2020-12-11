@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
 use App\Http\Requests\UserFormRequest;
+use App\Http\Requests\UserUpdateFormRequest;
 
 class UserController extends Controller
 {
@@ -75,10 +76,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserFormRequest $request, $id)
+    public function update(UserUpdateFormRequest $request, User $user)
     {
-        $user = User::findOrFail($id);
-        $user->fill($request->all())->save();
+        // $user->fill($request->all())->save();
+        $user->update($request->all());
         return redirect('/users')->with('message', 'De gegevens zijn opgeslagen in de database');
     }
 
@@ -88,8 +89,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return back();
     }
 }

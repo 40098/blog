@@ -25,7 +25,14 @@
                     <td>{{$user->name}}</td>
                     <td>{{$user->role}}</td>
                     <td>{{$user->email}}</td>
-                <td><a href="users/{{$user->id}}/edit">Bewerken</a></td>
+                <td>
+                    <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">Bewerken</a>
+                        @csrf
+                        @method('delete')
+                        <input type="submit" value="Verwijderen" class="btn btn-danger" onclick="return confirm('Weet je het zeker?')"/>
+                    </form>
+                </td>
                 </tr>
             @endforeach
         </tbody>
