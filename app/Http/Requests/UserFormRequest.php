@@ -26,7 +26,8 @@ class UserFormRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:3|max:50',
-            'email' => 'required|email|min:4|max:50|unique:users',
+            'email' => ['required', 'email', 'min:4', 'max:50', Rule::unique('users')->ignore($user->id)],
+            // 'email' => 'required|email|min:4|max:50|unique:users',
             'password' => 'required|string|min:4|max:50|',
             'role' => ['required', Rule::in(['admin', 'writer', 'follower'])]
         ];

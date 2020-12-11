@@ -16,6 +16,7 @@
             <th>Naam</th>
             <th>Rol</th>
             <th>E-mail</th>
+            <th>Acties</th>
         </thead>
         <tbody>
             @foreach($users as $user)
@@ -24,6 +25,7 @@
                     <td>{{$user->name}}</td>
                     <td>{{$user->role}}</td>
                     <td>{{$user->email}}</td>
+                <td><a href="users/{{$user->id}}/edit">Bewerken</a></td>
                 </tr>
             @endforeach
         </tbody>
